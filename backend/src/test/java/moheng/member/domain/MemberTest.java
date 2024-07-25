@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import moheng.member.exception.InvalidEmailFormatException;
 import moheng.member.exception.InvalidNicknameFormatException;
+import moheng.member.exception.NoExistSocialTypeException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -47,5 +48,14 @@ public class MemberTest {
                 "qweiqnweiqnweiqwieqniweiqweiqwneiqnweqwienwqeqieqnweiqwneiqwenqweiqnweiqweqweqweqweinqwneiqwei",
                 "profile_img_url", SocialType.KAKAO))
                 .isInstanceOf(InvalidNicknameFormatException.class);
+    }
+
+    @DisplayName("존재하지 않는 소셜 로그인 제공처라면 예외가 발생한다.")
+    @Test
+    public void 존재하지_않는_소셜_로그인_제공처라면_예외가_발생한다() {
+        // given, when, then
+        assertThatThrownBy(() -> new Member("msung6924@naver.com", "msung99",
+                "profile_img_url", null))
+                .isInstanceOf(NoExistSocialTypeException.class);
     }
 }

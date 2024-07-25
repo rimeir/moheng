@@ -68,7 +68,7 @@ public class Member extends BaseEntity {
     }
 
     private void validateSocialType(final SocialType socialType) {
-        if(!SocialType.isMatches(socialType.toString())) {
+        if(!SocialType.isMatches(socialType)) {
             throw new NoExistSocialTypeException("존재하지 않는 소셜 로그인 제공처입니다.");
         }
     }
