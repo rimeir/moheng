@@ -1,2 +1,5 @@
-package moheng.member.domain;public class SocialType {
+package moheng.member.domain;
+
+public enum SocialType {
+    KAKAO, GOOGLE;
 }
