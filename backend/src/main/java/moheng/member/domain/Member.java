@@ -41,7 +41,6 @@ public class Member extends BaseEntity {
                   final String profileImageUrl, final SocialType socialType) {
         validateEmail(email);
         validateNickName(nickName);
-        validateProfileImageUri(profileImageUrl);
         validateSocialType(socialType);
 
         this.email = email;
@@ -62,9 +61,6 @@ public class Member extends BaseEntity {
                 displayName.length() > MAX_NICK_NAME_LENGTH) {
             throw new InvalidNicknameFormatException(String.format("이름은 %d자 이상 1자 %d이하여야 합니다.",  MIN_NICK_NAME_LENGTH, MAX_NICK_NAME_LENGTH));
         }
-    }
-
-    private void validateProfileImageUri(final String profileImageUrl) {
     }
 
     private void validateSocialType(final SocialType socialType) {
