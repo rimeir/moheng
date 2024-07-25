@@ -3,6 +3,7 @@ package moheng.member.domain;
 import jakarta.persistence.*;
 import moheng.global.entity.BaseEntity;
 import moheng.member.exception.InvalidEmailFormatException;
+import moheng.member.exception.InvalidNicknameFormatException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,6 +12,8 @@ import java.util.regex.Pattern;
 @Entity
 public class Member extends BaseEntity {
     private static final Pattern EMAIL_FORMAT = Pattern.compile("^[a-z0-9._-]+@[a-z]+[.]+[a-z]{2,3}$");
+    private static final int MAX_NICK_NAME_LENGTH = 50;
+    private static final int MIN_NICK_NAME_LENGTH = 2;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,7 +57,10 @@ public class Member extends BaseEntity {
     }
 
     private void validateNickName(final String displayName) {
-
+        if (displayName.isEmpty() || displayName.length() < MIN_NICK_NAME_LENGTH ||
+                displayName.length() > MAX_NICK_NAME_LENGTH) {
+            throw new InvalidNicknameFormatException(String.format("이름은 %d자 이상 1자 %d이하여야 합니다.",  MIN_NICK_NAME_LENGTH, MAX_NICK_NAME_LENGTH));
+        }
     }
 
     private void validateProfileImageUri(final String profileImageUrl) {
