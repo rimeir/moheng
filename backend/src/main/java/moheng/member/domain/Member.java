@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import moheng.global.entity.BaseEntity;
 import moheng.member.exception.InvalidEmailFormatException;
 import moheng.member.exception.InvalidNicknameFormatException;
+import moheng.member.exception.NoExistSocialTypeException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -67,5 +68,8 @@ public class Member extends BaseEntity {
     }
 
     private void validateSocialType(final SocialType socialType) {
+        if(!SocialType.isMatches(socialType.toString())) {
+            throw new NoExistSocialTypeException("존재하지 않는 소셜 로그인 제공처입니다.");
+        }
     }
 }
