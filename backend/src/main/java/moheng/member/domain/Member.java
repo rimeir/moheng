@@ -3,9 +3,14 @@ package moheng.member.domain;
 import jakarta.persistence.*;
 import moheng.global.entity.BaseEntity;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @Table(name = "member")
 @Entity
 public class Member extends BaseEntity {
+    private static final Pattern EMAIL_FORMAT = Pattern.compile("^[a-z0-9._-]+@[a-z]+[.]+[a-z]{2,3}$");
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -41,6 +46,10 @@ public class Member extends BaseEntity {
     }
 
     private void validateEmail(final String email) {
+        Matcher matcher = EMAIL_FORMAT.matcher(email);
+        if (!matcher.matches()) {
+            throw new RuntimeException("이메일 형식이 올바르지 않습니다.");
+        }
     }
 
     private void validateNickName(final String displayName) {
