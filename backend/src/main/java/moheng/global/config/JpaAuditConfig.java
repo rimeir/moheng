@@ -1,2 +1,4 @@
-package moheng.global.config;public class JpaAduit {
+package moheng.global.config;
+
+public class JpaAuditConfig {
 }

@@ -1,2 +1,4 @@
-package moheng.member.domain;public interface MemberRepository {
+package moheng.member.domain.repository;
+
+public interface MemberRepository {
 }

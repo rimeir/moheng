@@ -1,2 +1,4 @@
-package moheng.global.config;public class WebConfig {
+package moheng.global.config;
+
+public class WebConfig {
 }

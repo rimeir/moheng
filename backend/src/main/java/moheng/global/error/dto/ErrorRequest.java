@@ -1,2 +1,4 @@
-package moheng.global.error.dto;public class ErrorRequest {
+package moheng.global.error.dto;
+
+public class ErrorRequest {
 }

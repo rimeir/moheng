@@ -1,2 +1,4 @@
-package moheng.member.dto;public class MemberRequest {
+package moheng.member.dto.request;
+
+public class MemberRequest {
 }

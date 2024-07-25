@@ -1,2 +1,4 @@
-package moheng.member.presentation;public class MemberController {
+package moheng.member.presentation;
+
+public class MemberController {
 }

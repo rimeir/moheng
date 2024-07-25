@@ -1,2 +1,4 @@
-package moheng.global.error;public class ControllerAdvice {
+package moheng.global.error;
+
+public class ControllerAdvice {
 }

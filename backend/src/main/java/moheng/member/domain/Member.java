@@ -1,2 +1,4 @@
-package moheng.member;public class Member {
+package moheng.member.domain;
+
+public class Member {
 }

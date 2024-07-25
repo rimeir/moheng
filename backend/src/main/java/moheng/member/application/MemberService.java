@@ -1,2 +1,4 @@
-package moheng.member.application;public class MemberService {
+package moheng.member.application;
+
+public class MemberService {
 }

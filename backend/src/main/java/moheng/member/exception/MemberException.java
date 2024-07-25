@@ -1,2 +1,4 @@
-package moheng.member.exception;public class MemberException {
+package moheng.member.exception;
+
+public class MemberException {
 }
