@@ -2,6 +2,7 @@ package moheng.member.domain;
 
 import jakarta.persistence.*;
 import moheng.global.entity.BaseEntity;
+import moheng.member.exception.InvalidEmailFormatException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,11 +49,12 @@ public class Member extends BaseEntity {
     private void validateEmail(final String email) {
         Matcher matcher = EMAIL_FORMAT.matcher(email);
         if (!matcher.matches()) {
-            throw new RuntimeException("이메일 형식이 올바르지 않습니다.");
+            throw new InvalidEmailFormatException("이메일 형식이 올바르지 않습니다.");
         }
     }
 
     private void validateNickName(final String displayName) {
+
     }
 
     private void validateProfileImageUri(final String profileImageUrl) {

@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
+import moheng.member.exception.InvalidEmailFormatException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -34,6 +35,6 @@ public class MemberTest {
         // given & when & then
         assertThatThrownBy(() -> new Member("msung6924naver.com", "msung99",
                 "profile_img_url", SocialType.KAKAO))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(InvalidEmailFormatException.class);
     }
 }
