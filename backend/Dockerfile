@@ -16,7 +16,7 @@ COPY src /app/src
 # 최소권한 설정
 RUN groupadd -r appgroup && useradd -r -g appgroup appuser \
     && mkdir -p /home/appuser/.gradle \
-    && chown -R appuser:appgroup /app /home/appuser/.gradle
+    && chown -R appuser:appgroup /app /home/appuser/.gradle gradlew
 
 USER appuser
 
