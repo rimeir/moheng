@@ -2,11 +2,10 @@ package moheng.auth.presentation;
 
 import moheng.auth.application.AuthService;
 import moheng.auth.dto.OAuthUriResponse;
+import moheng.auth.dto.TokenRequest;
+import moheng.auth.dto.TokenResponse;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -20,5 +19,12 @@ public class AuthController {
     @GetMapping("/{provider}/link")
     public ResponseEntity<OAuthUriResponse> generateUri(@PathVariable final String provider) {
         return ResponseEntity.ok(new OAuthUriResponse(authService.generateUri()));
+    }
+
+    @PostMapping("/{oauthProvider}/token")
+    public ResponseEntity<TokenResponse> generateToken(@PathVariable final String oauthProvider,
+                                                       @RequestBody final TokenRequest tokenRequest) {
+        TokenResponse tokenResponse = authService.generateTokenWithCode(tokenRequest.getCode());
+        return ResponseEntity.ok(tokenResponse);
     }
 }
