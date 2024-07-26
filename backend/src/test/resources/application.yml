@@ -26,3 +26,9 @@ oauth:
     client_secret: 3ZPJ93VC9MCuCXmPCDzrGmum2M3A7tif
     token_uri: https://kauth.kakao.com/oauth/token
     user_uri: https://kapi.kakao.com/v2/user/me
+
+security:
+  jwt:
+    token:
+      secret-key: secretsecretsecretsecretsecretsecret
+      expire-length: 3600
