@@ -1,27 +1,18 @@
 package moheng.auth.application;
 
+import moheng.auth.domain.OAuthUriProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthService {
-    private static final String KAKAO_OAUTH_END_POINT = "";
-    private final String redirectUri;
-    private final String clientId;
-    private final String clientSecret;
+    private final OAuthUriProvider oAuthUriProvider;
 
-    public AuthService(@Value("${oauth.kakao.redirect_uri}") final String redirectUri,
-                       @Value("${oauth.kakao.redirect_uri}") final String clientId,
-                       @Value("${oauth.kakao.client_secret}") final String clientSecret) {
-        this.redirectUri = redirectUri;
-        this.clientId = clientId;
-        this.clientSecret = clientSecret;
+    public AuthService(OAuthUriProvider oAuthUriProvider) {
+        this.oAuthUriProvider = oAuthUriProvider;
     }
 
     public String generateLink() {
-        return KAKAO_OAUTH_END_POINT + "?"
-                + "client_id=" + clientId + "&"
-                + "redirect_uri=" + redirectUri + "&"
-                + "response_type=code&";
+        return oAuthUriProvider.generateUri();
     }
 }

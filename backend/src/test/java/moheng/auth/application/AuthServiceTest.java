@@ -21,7 +21,7 @@ class AuthServiceTest {
         // given
         String link = authService.generateLink();
 
-        // when & then
+        // when, then
         assertThat(link).isNotEmpty();
     }
 }
