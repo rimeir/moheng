@@ -49,7 +49,7 @@ public class KakaoOAuthClient implements OAuthClient {
         final Map<String, Boolean> queryParam = new HashMap<>();
         queryParam.put("secure_resource", Boolean.TRUE);
 
-        final ResponseEntity<OAuthMember> oAuthMember = restTemplate.exchange(
+        final ResponseEntity<OAuthMember> kakaoOAuthMember = restTemplate.exchange(
                 userUri,
                 HttpMethod.GET,
                 userInfoRequestEntity,
@@ -57,8 +57,7 @@ public class KakaoOAuthClient implements OAuthClient {
                 queryParam
         );
 
-
-        return oAuthMember.getBody();
+        return kakaoOAuthMember.getBody();
     }
 
     private String requestKakaoAccessToken(String code) {

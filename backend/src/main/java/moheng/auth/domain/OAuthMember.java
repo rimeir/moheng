@@ -1,25 +1,45 @@
 package moheng.auth.domain;
 
-public class OAuthMember {
-    private final String email;
-    private final String nickname;
-    private final String profileImageUrl;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    public OAuthMember(String email, String nickname, String profileImageUrl) {
-        this.email = email;
-        this.nickname = nickname;
-        this.profileImageUrl = profileImageUrl;
+public class OAuthMember {
+    @JsonProperty("id")
+    private String socialLoginId;
+
+    @JsonProperty("kakao_account")
+    private KakaoAccount kakaoAccount;
+
+    private class KakaoAccount {
+        @JsonProperty("profile")
+        private KakaoProfile kakaoProfile;
     }
 
-    public String getEmail() {
-        return email;
+    private class KakaoProfile {
+        @JsonProperty("nickname")
+        private String nickname;
+
+        @JsonProperty("profile_image_url")
+        private String image;
+    }
+
+    public OAuthMember(String socialLoginId, String nickname, String imageurl) {
+        this.socialLoginId = socialLoginId;
+        this.kakaoAccount = new KakaoAccount();
+        this.kakaoAccount.kakaoProfile = new KakaoProfile();
+        this.kakaoAccount.kakaoProfile.nickname = nickname;
+        this.kakaoAccount.kakaoProfile.image = imageurl;
+    }
+
+    public String getSocialLoginId() {
+        return socialLoginId;
     }
 
     public String getNickname() {
-        return nickname;
+        return kakaoAccount.kakaoProfile.nickname;
     }
 
-    public String getProfileImageUrl() {
-        return profileImageUrl;
+    public String getImageUrl() {
+        return kakaoAccount.kakaoProfile.image;
     }
 }
+
