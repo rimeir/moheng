@@ -7,7 +7,7 @@ COPY gradlew gradle build.gradle settings.gradle /app/
 COPY gradle/wrapper /app/gradle/wrapper
 
 # 실행권한 부여 & build.gradle 의존성 다운로드
-RUN chmod +x ./gradlew \
+RUN chmod +x gradlew \
     && ./gradlew dependencies
 
 # 소스코드 복사
