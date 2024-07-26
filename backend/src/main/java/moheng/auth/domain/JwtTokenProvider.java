@@ -12,8 +12,8 @@ public class JwtTokenProvider {
     private final SecretKey secretKey;
     private final long tokenValidityInSeconds;
 
-    public JwtTokenProvider(@Value("") final SecretKey secretKey,
-                            @Value("") final long tokenValidityInSeconds) {
+    public JwtTokenProvider(@Value("${security.jwt.token.secret_key}") final SecretKey secretKey,
+                            @Value("${security.jwt.token.expire_length}") final long tokenValidityInSeconds) {
         this.secretKey = secretKey;
         this.tokenValidityInSeconds = tokenValidityInSeconds;
     }
@@ -46,7 +46,7 @@ public class JwtTokenProvider {
                     .build()
                     .parseClaimsJws(token);
 
-            claims().getExpiration().before(new Date());
+            claims.getBody().getExpiration().before(new Date());
         } catch (JwtException | IllegalArgumentException e) {
             throw new RuntimeException();
         }

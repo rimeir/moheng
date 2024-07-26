@@ -19,6 +19,7 @@ logging:
           descriptor:
             sql:
               BasicBinder: TRACE
+
 oauth:
   kakao:
     authorize_uri: https://kauth.kakao.com/oauth/authorize
@@ -30,5 +31,5 @@ oauth:
 security:
   jwt:
     token:
-      secret-key: secretsecretsecretsecretsecretsecret
-      expire-length: 3600
+      secret_key: secretsecretsecretsecretsecretsecret
+      expire_length: 3600
