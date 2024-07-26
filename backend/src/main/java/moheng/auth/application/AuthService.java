@@ -24,7 +24,7 @@ public class AuthService {
         return new TokenResponse("access_token");
     }
 
-    public String generateTokenWithCode() {
+    public String generateUri() {
         return oAuthUriProvider.generateUri();
     }
 }

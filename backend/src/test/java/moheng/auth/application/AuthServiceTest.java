@@ -22,7 +22,7 @@ class AuthServiceTest {
     void 카카오_로그인을_위한_링크를_생성한다() {
         // given
         String code = "authorization_code";
-        String link = authService.generateTokenWithCode();
+        String link = authService.generateUri();
 
         // when, then
         assertThat(link).isNotEmpty();
@@ -35,9 +35,9 @@ class AuthServiceTest {
         String code = "authorization code";
 
         // when
-        String actual = authService.generateTokenWithCode();
+        TokenResponse actual = authService.generateTokenWithCode(code);
 
         // then
-        assertThat(actual).isNotEmpty();
+        assertThat(actual.getAccessToken()).isNotEmpty();
     }
 }
