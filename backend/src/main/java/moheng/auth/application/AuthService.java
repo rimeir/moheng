@@ -12,7 +12,7 @@ public class AuthService {
         this.oAuthUriProvider = oAuthUriProvider;
     }
 
-    public String generateLink() {
-        return oAuthUriProvider.generateUri();
+    public String generateTokenWithCode(String code) {
+        return oAuthUriProvider.generateUri(code);
     }
 }
