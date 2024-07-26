@@ -19,7 +19,7 @@ public class KakaoUriProvider implements OAuthUriProvider {
     }
 
     @Override
-    public String generateUri(String code) {
+    public String generateUri() {
         return KAKAO_OAUTH_END_POINT + "?"
                 + "client_id=" + clientId + "&"
                 + "redirect_uri=" + redirectUri + "&"
