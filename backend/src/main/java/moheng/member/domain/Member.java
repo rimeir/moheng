@@ -68,4 +68,8 @@ public class Member extends BaseEntity {
             throw new NoExistSocialTypeException("존재하지 않는 소셜 로그인 제공처입니다.");
         }
     }
+
+    public Long getId() {
+        return id;
+    }
 }

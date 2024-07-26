@@ -1,5 +1,6 @@
 package moheng.member.application;
 
+import moheng.auth.domain.OAuthMember;
 import moheng.member.domain.Member;
 import moheng.member.domain.repository.MemberRepository;
 import moheng.member.exception.NoExistMemberException;
@@ -18,5 +19,13 @@ public class MemberService {
     public Member findByEmail(final String email) {
         return memberRepository.findByEmail(email)
                 .orElseThrow(NoExistMemberException::new);
+    }
+
+    public boolean existsByEmail(final String email) {
+        return memberRepository.existsByEmail(email);
+    }
+
+    public void save(Member member) {
+
     }
 }
