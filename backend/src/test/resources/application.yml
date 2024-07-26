@@ -10,6 +10,8 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
+  main:
+    allow-bean-definition-overriding: true
 
 logging:
   level:
@@ -33,3 +35,5 @@ security:
     token:
       secret_key: secretsecretsecretsecretsecretsecret
       expire_length: 3600
+
+
