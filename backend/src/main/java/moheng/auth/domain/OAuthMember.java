@@ -41,5 +41,9 @@ public class OAuthMember {
     public String getImageUrl() {
         return kakaoAccount.kakaoProfile.image;
     }
+
+    public String getEmail() {
+        return null;
+    }
 }
 

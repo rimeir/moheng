@@ -28,7 +28,7 @@ public class AuthService {
 
     @Transactional
     public TokenResponse generateTokenWithCode(final String code) {
-        OAuthMember oAuthMember = oAuthClient.getOAuthmember(code);
+        OAuthMember oAuthMember = oAuthClient.getOAuthMember(code);
         String email = oAuthMember.getEmail();
 
         if(!memberService.existsByEmail(email)) {
@@ -46,7 +46,7 @@ public class AuthService {
     }
 
     private Member generateMember(final OAuthMember oAuthMember) {
-        return new Member(oAuthMember.getEmail(), oAuthMember.getProfileImageUrl(),
-                oAuthMember.getProfileImageUrl(), SocialType.KAKAO);
+        return new Member(oAuthMember.getEmail(), oAuthMember.getNickname(),
+                oAuthMember.getImageUrl(), SocialType.KAKAO);
     }
 }

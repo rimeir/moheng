@@ -21,5 +21,4 @@ public class AuthController {
     public ResponseEntity<OAuthUriResponse> generateUri(@PathVariable final String provider) {
         return ResponseEntity.ok(new OAuthUriResponse(authService.generateUri()));
     }
-
 }
