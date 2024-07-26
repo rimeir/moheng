@@ -12,6 +12,9 @@ public class OAuthMember {
     private class KakaoAccount {
         @JsonProperty("profile")
         private KakaoProfile kakaoProfile;
+
+        @JsonProperty("email")
+        private String email;
     }
 
     private class KakaoProfile {
@@ -22,7 +25,8 @@ public class OAuthMember {
         private String image;
     }
 
-    public OAuthMember(String socialLoginId, String nickname, String imageurl) {
+    public OAuthMember(String email, String socialLoginId, String nickname, String imageurl) {
+        this.kakaoAccount.email = email;
         this.socialLoginId = socialLoginId;
         this.kakaoAccount = new KakaoAccount();
         this.kakaoAccount.kakaoProfile = new KakaoProfile();
@@ -43,7 +47,7 @@ public class OAuthMember {
     }
 
     public String getEmail() {
-        return null;
+        return kakaoAccount.email;
     }
 }
 
