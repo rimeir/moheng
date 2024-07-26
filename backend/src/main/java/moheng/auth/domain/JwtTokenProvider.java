@@ -1,6 +1,7 @@
 package moheng.auth.domain;
 
 import io.jsonwebtoken.*;
+import moheng.auth.exception.InvalidTokenException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -48,7 +49,7 @@ public class JwtTokenProvider {
 
             claims.getBody().getExpiration().before(new Date());
         } catch (JwtException | IllegalArgumentException e) {
-            throw new RuntimeException();
+            throw new InvalidTokenException("변조되었거나 만료된 토큰 입니다.");
         }
     }
 }

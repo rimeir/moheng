@@ -30,5 +30,5 @@ oauth:
 security:
   jwt:
     token:
-      secret-key: secretsecretsecretsecretsecretsecret
-      expire-length: 3600
+      secret_key: secretsecretsecretsecretsecretsecret
+      expire_length: 3600
