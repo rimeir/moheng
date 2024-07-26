@@ -1,0 +1,11 @@
+package moheng.config;
+
+import moheng.auth.domain.OAuthClient;
+import moheng.auth.domain.OAuthMember;
+
+public class StubOAuthClient implements OAuthClient {
+    @Override
+    public OAuthMember getOAuthmember(String code) {
+        return new OAuthMember("stub_email", "stub_nickname", "stub_image_url");
+    }
+}
