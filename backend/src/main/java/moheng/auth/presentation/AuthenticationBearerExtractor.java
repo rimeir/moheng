@@ -1,6 +1,7 @@
 package moheng.auth.presentation;
 
 import jakarta.servlet.http.HttpServletRequest;
+import moheng.auth.exception.EmptyBearerHeaderException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +14,7 @@ public class AuthenticationBearerExtractor {
     public static String extract(HttpServletRequest request) {
         String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (Objects.isNull(authorizationHeader)) {
-            throw new RuntimeException();
+            throw new EmptyBearerHeaderException("Authorization Bearer 해더 값이 비어있습니다.");
         }
 
         validateAuthorizationFormat(authorizationHeader);
@@ -22,7 +23,7 @@ public class AuthenticationBearerExtractor {
 
     private static void validateAuthorizationFormat(String authorizationHeader) {
         if (!authorizationHeader.toLowerCase().startsWith(BEARER_TYPE.toLowerCase())) {
-            throw new RuntimeException();
+            throw new InvalidTokenFormatException("유효하지 않은 토큰 형식입니다.");
         }
     }
 }
