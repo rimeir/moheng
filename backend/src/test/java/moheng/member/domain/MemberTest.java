@@ -12,6 +12,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class MemberTest {
 
     @DisplayName("카카오 소셜로그인 회원을 생성한다.")
@@ -62,11 +65,11 @@ public class MemberTest {
 
     @DisplayName("성별 형식이 올바르지 않다면 예외가 발생한다.")
     @Test
-    public void a() {
+    public void 성별_형식이_올바르지_않다면_예외가_발생한다() {
         // given, when, then
         assertThatThrownBy(() -> new Member(1L, "msung6924@naver.com",
                 "msung99", "profile_img_url",
-                SocialType.KAKAO, null))
+                SocialType.KAKAO, LocalDate.now(), null))
                 .isInstanceOf(InvalidGenderFormatException.class);
     }
 }
