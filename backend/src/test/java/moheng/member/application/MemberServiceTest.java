@@ -62,4 +62,20 @@ public class MemberServiceTest {
         // then
         assertThat(actual).isTrue();
     }
+
+    @DisplayName("이미 중복되는 닉네임이 존재한다면 참을 리턴한다.")
+    @Test
+    public void 이미_존재하는_닉네임이_존재한다면_참을_리턴한다() {
+        // given
+        String email = "msung6924@naver.com";
+        String nickname = "msung99";
+        String profileImageUrl = "https://image";
+        Member member = new Member(email, nickname, profileImageUrl, SocialType.KAKAO);
+        memberService.save(member);
+
+        // when, then
+        boolean actual = memberService.existsByNickname(nickname);
+
+       assertThat(actual).isTrue();
+    }
 }
