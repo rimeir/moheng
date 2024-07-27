@@ -101,4 +101,20 @@ public class Member extends BaseEntity {
     public Long getId() {
         return id;
     }
+
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+
+    public GenderType getGenderType() {
+        return genderType;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
 }
