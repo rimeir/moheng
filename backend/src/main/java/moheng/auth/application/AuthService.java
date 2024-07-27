@@ -46,7 +46,6 @@ public class AuthService {
     }
 
     private Member generateMember(final OAuthMember oAuthMember) {
-        return new Member(oAuthMember.getEmail(), oAuthMember.getNickname(),
-                oAuthMember.getImageUrl(), SocialType.KAKAO);
+        return new Member(oAuthMember.getEmail(), SocialType.KAKAO);
     }
 }

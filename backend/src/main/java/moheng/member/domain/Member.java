@@ -2,10 +2,9 @@ package moheng.member.domain;
 
 import jakarta.persistence.*;
 import moheng.global.entity.BaseEntity;
-import moheng.member.exception.InvalidEmailFormatException;
-import moheng.member.exception.InvalidNicknameFormatException;
-import moheng.member.exception.NoExistSocialTypeException;
+import moheng.member.exception.*;
 
+import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,29 +23,47 @@ public class Member extends BaseEntity {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "nick_name", nullable = false)
+    @Column(name = "nick_name")
     private String nickName;
 
-    @Column(name = "profile_image_url", nullable = false)
+    @Column(name = "profile_image_url")
     private String profileImageUrl;
 
     @Enumerated(value = EnumType.STRING)
     @Column(name = "social_type", nullable = false)
     private SocialType socialType;
 
+    @Column(name = "birthday")
+    private LocalDate birthday;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "gender_type")
+    private GenderType genderType;
+
     protected Member() {
     }
 
-    public Member(final String email, final String nickName,
-                  final String profileImageUrl, final SocialType socialType) {
+    public Member(final String email, final SocialType socialType) {
         validateEmail(email);
+        this.email = email;
+        this.socialType = socialType;
+    }
+
+    public Member(final Long id, final String email, final String nickName,
+                  final String profileImageUrl, final SocialType socialType,
+                  final LocalDate birthday, final GenderType genderType) {
         validateNickName(nickName);
+        validateGenderType(genderType);
+        validateBirthday(birthday);
         validateSocialType(socialType);
 
+        this.id = id;
         this.email = email;
         this.nickName = nickName;
         this.profileImageUrl = profileImageUrl;
         this.socialType = socialType;
+        this.birthday = birthday;
+        this.genderType = genderType;
     }
 
     private void validateEmail(final String email) {
@@ -66,6 +83,18 @@ public class Member extends BaseEntity {
     private void validateSocialType(final SocialType socialType) {
         if(!SocialType.isMatches(socialType)) {
             throw new NoExistSocialTypeException("존재하지 않는 소셜 로그인 제공처입니다.");
+        }
+    }
+
+    private void validateBirthday(final LocalDate birthday) {
+        if(birthday.isAfter(LocalDate.now())) {
+            throw new InvalidBirthdayException("생년월일은 현재 날짜보다 더 이후일 수 없습니다.");
+        }
+    }
+
+    private void validateGenderType(final GenderType genderType) {
+        if(!GenderType.isMatches(genderType)) {
+            throw new InvalidGenderFormatException("유효하지 않은 성별 입니다.");
         }
     }
 

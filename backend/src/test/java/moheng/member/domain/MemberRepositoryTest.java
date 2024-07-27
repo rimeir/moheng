@@ -23,7 +23,7 @@ public class MemberRepositoryTest {
         String email = "msung6924@naver.com";
         String nickname = "msung99";
         String profile_image_url = "https://msung99";
-        Member member = new Member(email, nickname, profile_image_url, SocialType.KAKAO);
+        Member member = new Member(email, SocialType.KAKAO);
         Member savedMember = memberRepository.save(member);
 
         // when
