@@ -11,18 +11,20 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 @Component
-public class AuthenticationArgumentResolver extends HandlerMethodArgumentResolver {
+public class AuthenticationArgumentResolver implements HandlerMethodArgumentResolver {
     private final JwtTokenProvider jwtTokenProvider;
+    private final AuthenticationBearerExtractor authenticationBearerExtractor;
 
-    public AuthenticationArgumentResolver(JwtTokenProvider jwtTokenProvider) {
+    public AuthenticationArgumentResolver(JwtTokenProvider jwtTokenProvider, AuthenticationBearerExtractor authenticationBearerExtractor) {
         this.jwtTokenProvider = jwtTokenProvider;
+        this.authenticationBearerExtractor = authenticationBearerExtractor;
     }
 
     @Override
     public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer,
                                   NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) {
         HttpServletRequest request = nativeWebRequest.getNativeRequest(HttpServletRequest.class);
-        String accessToken = request.getHeader("Authorization");
+        String accessToken = authenticationBearerExtractor.extract(request);
         jwtTokenProvider.validateToken(accessToken);
         Long id = Long.parseLong(jwtTokenProvider.getPayload(accessToken));
         return new LoginMember(id);
@@ -30,6 +32,6 @@ public class AuthenticationArgumentResolver extends HandlerMethodArgumentResolve
 
     @Override
     public boolean supportsParameter(MethodParameter methodParameter) {
-
+        return methodParameter.hasMethodAnnotation(Authentication.class);
     }
 }
