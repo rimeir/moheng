@@ -45,6 +45,7 @@ public class Member extends BaseEntity {
 
     public Member(final String email, final SocialType socialType) {
         validateEmail(email);
+        this.email = email;
     }
 
     public Member(final Long id, final String email, final String nickName,

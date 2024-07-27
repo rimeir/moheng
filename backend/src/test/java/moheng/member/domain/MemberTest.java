@@ -19,8 +19,7 @@ public class MemberTest {
     public void 카카오_소셜로그인_회원을_생성한다() {
         // given, when, then
         assertDoesNotThrow(() ->
-                new Member("msung6924@naver.com", "msung99",
-                        "profile_img_url", SocialType.KAKAO));
+                new Member("msung6924@naver.com", SocialType.KAKAO));
     }
 
     @DisplayName("구글 소셜로그인 회원을 생성한다.")
@@ -28,16 +27,14 @@ public class MemberTest {
     public void 구글_소셜로그인_회원을_생성한다() {
         // given, when, then
         assertDoesNotThrow(() ->
-                new Member("msung6924@naver.com", "msung99",
-                        "profile_img_url", SocialType.GOOGLE));
+                new Member("msung6924@naver.com", SocialType.GOOGLE));
     }
 
     @DisplayName("이메일 형식이 올바르지 않다면 예외가 발생한다.")
     @Test
     public void 이메일_형식이_올바르지_않다면_예외가_발생한다() {
         // given, when, then
-        assertThatThrownBy(() -> new Member("msung6924naver.com", "msung99",
-                "profile_img_url", SocialType.KAKAO))
+        assertThatThrownBy(() -> new Member("msung6924naver.com", SocialType.KAKAO))
                 .isInstanceOf(InvalidEmailFormatException.class);
     }
 
@@ -45,9 +42,9 @@ public class MemberTest {
     @Test
     public void 닉네임_형식이_올바르지_않다면_예외가_발생한다() {
         // given, when, then
-        assertThatThrownBy(() -> new Member("msung6924@naver.com",
+        assertThatThrownBy(() -> new Member(1L, "msung6924@naver.com",
                 "qweiqnweiqnweiqwieqniweiqweiqwneiqnweqwienwqeqieqnweiqwneiqwenqweiqnweiqweqweqweqweinqwneiqwei",
-                "profile_img_url", SocialType.KAKAO))
+                "profile_img_url", SocialType.KAKAO, LocalDate.of(2000, 1, 1), GenderType.MEN))
                 .isInstanceOf(InvalidNicknameFormatException.class);
     }
 
@@ -55,8 +52,8 @@ public class MemberTest {
     @Test
     public void 존재하지_않는_소셜_로그인_제공처라면_예외가_발생한다() {
         // given, when, then
-        assertThatThrownBy(() -> new Member("msung6924@naver.com", "msung99",
-                "profile_img_url", null))
+        assertThatThrownBy(() -> new Member(1L, "msung6924@naver.com", "msung99",
+                "profile_img_url", null, LocalDate.of(2000, 1, 1), GenderType.MEN))
                 .isInstanceOf(NoExistSocialTypeException.class);
     }
 
