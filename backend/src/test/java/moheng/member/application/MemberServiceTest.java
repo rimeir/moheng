@@ -44,4 +44,22 @@ public class MemberServiceTest {
         // then
         assertThat(foundMember.getId()).isEqualTo(member.getId());
     }
+
+    @DisplayName("주어진 이메일로 가입된 회원이 존재하는지 확인한다.")
+    @Test
+    void 주어진_이메일로_가입된_회원이_존재하는지_확인한다() {
+        // given
+        String email = "msung6924@naver.com";
+        String nickname = "msung99";
+        String profileImageUrl = "https://image";
+
+        Member member = new Member(email, nickname, profileImageUrl, SocialType.KAKAO);
+        memberService.save(member);
+
+        // when
+        boolean actual = memberService.existsByEmail(email);
+
+        // then
+        assertThat(actual).isTrue();
+    }
 }
