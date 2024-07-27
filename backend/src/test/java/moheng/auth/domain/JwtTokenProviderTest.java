@@ -51,4 +51,15 @@ public class JwtTokenProviderTest {
         assertThatThrownBy(() -> jwtTokenProvider.validateToken(expiredToken))
                 .isInstanceOf(InvalidTokenException.class);
     }
+
+    @DisplayName("변조되었거나 문제가 발생한 토큰을 전달받으면 예외가 발생한다.")
+    @Test
+    void 변조되었거나_문제가_발생한_토큰을_전달받으면_예외가_발생한다() {
+        // given
+        String invalidToken = "invalid_token";
+
+        // when & then
+        assertThatThrownBy(() -> jwtTokenProvider.validateToken(invalidToken))
+                .isInstanceOf(InvalidTokenException.class);
+    }
 }
