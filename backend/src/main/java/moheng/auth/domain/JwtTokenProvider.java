@@ -1,11 +1,13 @@
 package moheng.auth.domain;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import moheng.auth.exception.InvalidTokenException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 @Component
@@ -13,9 +15,9 @@ public class JwtTokenProvider {
     private final SecretKey secretKey;
     private final long tokenValidityInSeconds;
 
-    public JwtTokenProvider(@Value("${security.jwt.token.secret_key}") final SecretKey secretKey,
+    public JwtTokenProvider(@Value("${security.jwt.token.secret_key}") final String secretKey,
                             @Value("${security.jwt.token.expire_length}") final long tokenValidityInSeconds) {
-        this.secretKey = secretKey;
+        this.secretKey = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
         this.tokenValidityInSeconds = tokenValidityInSeconds;
     }
 
