@@ -24,4 +24,18 @@ public class JwtTokenProviderTest {
         // then
         assertThat(actual.split("\\.")).hasSize(3);
     }
+
+    @DisplayName("JWT 토큰의 Payload 를 조회한다.")
+    @Test
+    void JWT_토큰의_Payload_를_조회한다() {
+        // given
+        String exptected = "hello";
+        String token = jwtTokenProvider.createToken(exptected);
+
+        // when
+        String actual = jwtTokenProvider.getPayload(token);
+
+        // then
+        assertThat(actual).isEqualTo(exptected);
+    }
 }
