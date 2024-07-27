@@ -16,6 +16,11 @@ public class MemberService {
         this.memberRepository = memberRepository;
     }
 
+    public Member findById(final Long id) {
+        return memberRepository.findById(id)
+                .orElseThrow(NoExistMemberException::new);
+    }
+
     public Member findByEmail(final String email) {
         return memberRepository.findByEmail(email)
                 .orElseThrow(NoExistMemberException::new);
