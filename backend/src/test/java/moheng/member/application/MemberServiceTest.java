@@ -26,4 +26,22 @@ public class MemberServiceTest {
         // when, then
         assertDoesNotThrow(() -> memberService.save(member));
     }
+
+    @DisplayName("이메일로 회원을 찾는다.")
+    @Test
+    void 이메일로_회원을_찾는다() {
+        // given
+        String email = "msung6924@naver.com";
+        String nickname = "msung99";
+        String profileImageUrl = "https://image";
+
+        Member member = new Member(email, nickname, profileImageUrl, SocialType.KAKAO);
+        memberService.save(member);
+
+        // when
+        Member foundMember = memberService.findByEmail(email);
+
+        // then
+        assertThat(foundMember.getId()).isEqualTo(member.getId());
+    }
 }
