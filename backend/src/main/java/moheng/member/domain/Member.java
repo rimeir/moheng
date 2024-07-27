@@ -34,6 +34,10 @@ public class Member extends BaseEntity {
     @Column(name = "social_type", nullable = false)
     private SocialType socialType;
 
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "gender_type")
+    private GenderType genderType;
+
     protected Member() {
     }
 
