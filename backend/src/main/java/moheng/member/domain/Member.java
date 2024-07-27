@@ -54,8 +54,16 @@ public class Member extends BaseEntity {
         this.socialType = socialType;
     }
 
-    public Member(final GenderType genderType) {
+    public Member(final Long id, final String email, final String nickName,
+                  final String profileImageUrl, final SocialType socialType,
+                  final GenderType genderType) {
         validateGenderType(genderType);
+
+        this.id = id;
+        this.email = email;
+        this.nickName = nickName;
+        this.profileImageUrl = profileImageUrl;
+        this.socialType = socialType;
         this.genderType = genderType;
     }
 

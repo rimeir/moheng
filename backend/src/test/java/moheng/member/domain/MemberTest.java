@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import moheng.member.exception.InvalidEmailFormatException;
+import moheng.member.exception.InvalidGenderFormatException;
 import moheng.member.exception.InvalidNicknameFormatException;
 import moheng.member.exception.NoExistSocialTypeException;
 import org.junit.jupiter.api.Assertions;
@@ -57,5 +58,15 @@ public class MemberTest {
         assertThatThrownBy(() -> new Member("msung6924@naver.com", "msung99",
                 "profile_img_url", null))
                 .isInstanceOf(NoExistSocialTypeException.class);
+    }
+
+    @DisplayName("성별 형식이 올바르지 않다면 예외가 발생한다.")
+    @Test
+    public void a() {
+        // given, when, then
+        assertThatThrownBy(() -> new Member(1L, "msung6924@naver.com",
+                "msung99", "profile_img_url",
+                SocialType.KAKAO, null))
+                .isInstanceOf(InvalidGenderFormatException.class);
     }
 }
