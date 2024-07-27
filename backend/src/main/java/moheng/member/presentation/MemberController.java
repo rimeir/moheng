@@ -21,6 +21,6 @@ public class MemberController {
     @GetMapping
     public ResponseEntity<MemberResponse> getUserInfo(@Authentication LoginMember loginMember) {
         MemberResponse response = memberService.findById(loginMember.getId());
-        return ResponseEntity(response);
+        return ResponseEntity.ok(response);
     }
 }
