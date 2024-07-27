@@ -4,10 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-import moheng.member.exception.InvalidEmailFormatException;
-import moheng.member.exception.InvalidGenderFormatException;
-import moheng.member.exception.InvalidNicknameFormatException;
-import moheng.member.exception.NoExistSocialTypeException;
+import moheng.member.exception.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -71,5 +68,15 @@ public class MemberTest {
                 "msung99", "profile_img_url",
                 SocialType.KAKAO, LocalDate.now(), null))
                 .isInstanceOf(InvalidGenderFormatException.class);
+    }
+
+    @DisplayName("생년월일이 현재 날짜보다 이후라면 예외가 발생한다.")
+    @Test
+    public void 생년월일이_현재_날짜보다_이후라면_예외가_발생한다() {
+        // given, when, then
+        assertThatThrownBy(() -> new Member(1L, "msung6924@naver.com",
+                "msung99", "profile_img_url",
+                SocialType.KAKAO, LocalDate.of(2200, 1, 1), GenderType.MEN))
+                .isInstanceOf(InvalidBirthdayException.class);
     }
 }
