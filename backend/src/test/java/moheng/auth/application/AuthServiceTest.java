@@ -2,6 +2,7 @@ package moheng.auth.application;
 
 import moheng.auth.dto.TokenResponse;
 import moheng.config.TestConfig;
+import moheng.member.domain.repository.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ class AuthServiceTest {
 
     @Autowired
     private AuthService authService;
+
+    @Autowired
+    private MemberRepository memberRepository;
 
     @DisplayName("카카오 로그인을 위한 링크를 생성한다.")
     @Test
@@ -39,5 +43,19 @@ class AuthServiceTest {
 
         // then
         assertThat(actual.getAccessToken()).isNotEmpty();
+    }
+
+    @DisplayName("Authorization Code 를 전달받으면 회원 정보가 데이터베이스에 저장된다.")
+    @Test
+    void Authorization_Code_를_전달받으면_회원_정보가_데이터베이스에_저장된다() {
+        // given
+        String code = "authorization code";
+        authService.generateTokenWithCode(code);
+
+        // when
+        boolean actual = memberRepository.existsByEmail("stub_email");
+
+        // then
+        assertThat(actual).isTrue();
     }
 }

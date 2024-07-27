@@ -2,7 +2,9 @@ package moheng.config;
 
 import moheng.auth.domain.OAuthClient;
 import moheng.auth.domain.OAuthMember;
+import org.springframework.stereotype.Component;
 
+@Component
 public class StubOAuthClient implements OAuthClient {
     @Override
     public OAuthMember getOAuthMember(String code) {
