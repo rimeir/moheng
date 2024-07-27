@@ -28,4 +28,8 @@ public class MemberService {
     public void save(Member member) {
         memberRepository.save(member);
     }
+
+    public boolean existsByNickname(final String nickname) {
+        return memberRepository.existsByNickName(nickname);
+    }
 }
