@@ -53,7 +53,7 @@ class AuthServiceTest {
         authService.generateTokenWithCode(code);
 
         // when
-        boolean actual = memberRepository.existsByEmail("stub_email");
+        boolean actual = memberRepository.existsByEmail("stub@naver.com");
 
         // then
         assertThat(actual).isTrue();
