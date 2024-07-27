@@ -26,9 +26,9 @@ public class OAuthMember {
     }
 
     public OAuthMember(String email, String socialLoginId, String nickname, String imageurl) {
-        this.kakaoAccount.email = email;
         this.socialLoginId = socialLoginId;
         this.kakaoAccount = new KakaoAccount();
+        this.kakaoAccount.email = email;
         this.kakaoAccount.kakaoProfile = new KakaoProfile();
         this.kakaoAccount.kakaoProfile.nickname = nickname;
         this.kakaoAccount.kakaoProfile.image = imageurl;
