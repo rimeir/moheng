@@ -2,11 +2,9 @@ package moheng.member.domain;
 
 import jakarta.persistence.*;
 import moheng.global.entity.BaseEntity;
-import moheng.member.exception.InvalidEmailFormatException;
-import moheng.member.exception.InvalidGenderFormatException;
-import moheng.member.exception.InvalidNicknameFormatException;
-import moheng.member.exception.NoExistSocialTypeException;
+import moheng.member.exception.*;
 
+import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,6 +33,9 @@ public class Member extends BaseEntity {
     @Column(name = "social_type", nullable = false)
     private SocialType socialType;
 
+    @Column(name = "birthday")
+    private LocalDate birthday;
+
     @Enumerated(value = EnumType.STRING)
     @Column(name = "gender_type")
     private GenderType genderType;
@@ -56,14 +57,16 @@ public class Member extends BaseEntity {
 
     public Member(final Long id, final String email, final String nickName,
                   final String profileImageUrl, final SocialType socialType,
-                  final GenderType genderType) {
+                  final LocalDate birthday, final GenderType genderType) {
         validateGenderType(genderType);
+        validateBirthday(birthday);
 
         this.id = id;
         this.email = email;
         this.nickName = nickName;
         this.profileImageUrl = profileImageUrl;
         this.socialType = socialType;
+        this.birthday = birthday;
         this.genderType = genderType;
     }
 
@@ -84,6 +87,12 @@ public class Member extends BaseEntity {
     private void validateSocialType(final SocialType socialType) {
         if(!SocialType.isMatches(socialType)) {
             throw new NoExistSocialTypeException("존재하지 않는 소셜 로그인 제공처입니다.");
+        }
+    }
+
+    private void validateBirthday(final LocalDate birthday) {
+        if(birthday.isAfter(LocalDate.now())) {
+            throw new InvalidBirthdayException("생년월일은 현재 날짜보다 더 이후일 수 없습니다.");
         }
     }
 
