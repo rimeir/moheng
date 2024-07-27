@@ -3,6 +3,7 @@ package moheng.member.domain;
 import jakarta.persistence.*;
 import moheng.global.entity.BaseEntity;
 import moheng.member.exception.InvalidEmailFormatException;
+import moheng.member.exception.InvalidGenderFormatException;
 import moheng.member.exception.InvalidNicknameFormatException;
 import moheng.member.exception.NoExistSocialTypeException;
 
@@ -53,6 +54,11 @@ public class Member extends BaseEntity {
         this.socialType = socialType;
     }
 
+    public Member(final GenderType genderType) {
+        validateGenderType(genderType);
+        this.genderType = genderType;
+    }
+
     private void validateEmail(final String email) {
         Matcher matcher = EMAIL_FORMAT.matcher(email);
         if (!matcher.matches()) {
@@ -70,6 +76,12 @@ public class Member extends BaseEntity {
     private void validateSocialType(final SocialType socialType) {
         if(!SocialType.isMatches(socialType)) {
             throw new NoExistSocialTypeException("존재하지 않는 소셜 로그인 제공처입니다.");
+        }
+    }
+
+    private void validateGenderType(final GenderType genderType) {
+        if(!GenderType.isMatches(genderType)) {
+            throw new InvalidGenderFormatException("유효하지 않은 성별 입니다.");
         }
     }
 
