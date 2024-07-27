@@ -23,10 +23,10 @@ public class Member extends BaseEntity {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "nick_name", nullable = false)
+    @Column(name = "nick_name")
     private String nickName;
 
-    @Column(name = "profile_image_url", nullable = false)
+    @Column(name = "profile_image_url")
     private String profileImageUrl;
 
     @Enumerated(value = EnumType.STRING)
@@ -46,6 +46,7 @@ public class Member extends BaseEntity {
     public Member(final String email, final SocialType socialType) {
         validateEmail(email);
         this.email = email;
+        this.socialType = socialType;
     }
 
     public Member(final Long id, final String email, final String nickName,

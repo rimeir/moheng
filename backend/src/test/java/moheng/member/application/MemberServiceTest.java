@@ -4,12 +4,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
+import moheng.member.domain.GenderType;
 import moheng.member.domain.Member;
 import moheng.member.domain.SocialType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.time.LocalDate;
 
 @SpringBootTest
 public class MemberServiceTest {
@@ -20,8 +23,7 @@ public class MemberServiceTest {
     @Test
     void 소셜_로그인을_시도한_회원을_저장한다() {
         // given
-        Member member = new Member("msung6924@naver.com", "msung99",
-                "profile_image_url", SocialType.KAKAO);
+        Member member = new Member("msung6924@naver.com", SocialType.KAKAO);
 
         // when, then
         assertDoesNotThrow(() -> memberService.save(member));
@@ -35,7 +37,7 @@ public class MemberServiceTest {
         String nickname = "msung99";
         String profileImageUrl = "https://image";
 
-        Member member = new Member(email, nickname, profileImageUrl, SocialType.KAKAO);
+        Member member = new Member(email, SocialType.KAKAO);
         memberService.save(member);
 
         // when
@@ -53,7 +55,7 @@ public class MemberServiceTest {
         String nickname = "msung99";
         String profileImageUrl = "https://image";
 
-        Member member = new Member(email, nickname, profileImageUrl, SocialType.KAKAO);
+        Member member = new Member(email, SocialType.KAKAO);
         memberService.save(member);
 
         // when
@@ -70,7 +72,9 @@ public class MemberServiceTest {
         String email = "msung6924@naver.com";
         String nickname = "msung99";
         String profileImageUrl = "https://image";
-        Member member = new Member(email, nickname, profileImageUrl, SocialType.KAKAO);
+        Member member = new Member(2L, email, nickname,
+                profileImageUrl, SocialType.KAKAO,
+                LocalDate.of(2000, 1, 1), GenderType.MEN);
         memberService.save(member);
 
         // when, then
