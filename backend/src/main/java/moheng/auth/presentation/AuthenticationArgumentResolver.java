@@ -15,14 +15,14 @@ public class AuthenticationArgumentResolver implements HandlerMethodArgumentReso
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationBearerExtractor authenticationBearerExtractor;
 
-    public AuthenticationArgumentResolver(JwtTokenProvider jwtTokenProvider, AuthenticationBearerExtractor authenticationBearerExtractor) {
+    public AuthenticationArgumentResolver(final JwtTokenProvider jwtTokenProvider, final AuthenticationBearerExtractor authenticationBearerExtractor) {
         this.jwtTokenProvider = jwtTokenProvider;
         this.authenticationBearerExtractor = authenticationBearerExtractor;
     }
 
     @Override
-    public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer,
-                                  NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) {
+    public Object resolveArgument(final MethodParameter methodParameter, final ModelAndViewContainer modelAndViewContainer,
+                                  final NativeWebRequest nativeWebRequest, final WebDataBinderFactory webDataBinderFactory) {
         HttpServletRequest request = nativeWebRequest.getNativeRequest(HttpServletRequest.class);
         String accessToken = authenticationBearerExtractor.extract(request);
         jwtTokenProvider.validateToken(accessToken);
@@ -31,7 +31,7 @@ public class AuthenticationArgumentResolver implements HandlerMethodArgumentReso
     }
 
     @Override
-    public boolean supportsParameter(MethodParameter methodParameter) {
+    public boolean supportsParameter(final MethodParameter methodParameter) {
         return methodParameter.hasMethodAnnotation(Authentication.class);
     }
 }
