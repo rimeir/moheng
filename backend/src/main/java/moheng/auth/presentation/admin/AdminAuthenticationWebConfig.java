@@ -1,4 +1,4 @@
-package moheng.auth.presentation;
+package moheng.auth.presentation.admin;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;

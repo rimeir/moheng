@@ -1,4 +1,4 @@
-package moheng.auth.presentation;
+package moheng.auth.presentation.authentication;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

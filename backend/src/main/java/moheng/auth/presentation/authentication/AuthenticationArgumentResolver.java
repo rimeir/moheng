@@ -1,4 +1,4 @@
-package moheng.auth.presentation;
+package moheng.auth.presentation.authentication;
 
 import jakarta.servlet.http.HttpServletRequest;
 import moheng.auth.domain.JwtTokenProvider;
@@ -11,11 +11,11 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 @Component
-public class AdminAuthenticationArgumentResolver implements HandlerMethodArgumentResolver {
+public class AuthenticationArgumentResolver implements HandlerMethodArgumentResolver {
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationBearerExtractor authenticationBearerExtractor;
 
-    public AdminAuthenticationArgumentResolver(final JwtTokenProvider jwtTokenProvider, final AuthenticationBearerExtractor authenticationBearerExtractor) {
+    public AuthenticationArgumentResolver(final JwtTokenProvider jwtTokenProvider, final AuthenticationBearerExtractor authenticationBearerExtractor) {
         this.jwtTokenProvider = jwtTokenProvider;
         this.authenticationBearerExtractor = authenticationBearerExtractor;
     }
@@ -32,6 +32,6 @@ public class AdminAuthenticationArgumentResolver implements HandlerMethodArgumen
 
     @Override
     public boolean supportsParameter(final MethodParameter methodParameter) {
-        return methodParameter.hasMethodAnnotation(AdminAuthentication.class);
+        return methodParameter.hasMethodAnnotation(Authentication.class);
     }
 }
