@@ -3,6 +3,7 @@ package moheng.member.application;
 import moheng.auth.domain.OAuthMember;
 import moheng.member.domain.Member;
 import moheng.member.domain.repository.MemberRepository;
+import moheng.member.dto.response.MemberResponse;
 import moheng.member.exception.NoExistMemberException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,12 @@ public class MemberService {
 
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
+    }
+
+    public MemberResponse findById(final Long id) {
+        Member foundMember = memberRepository.findById(id)
+                .orElseThrow(NoExistMemberException::new);
+        return new MemberResponse(foundMember);
     }
 
     public Member findByEmail(final String email) {
